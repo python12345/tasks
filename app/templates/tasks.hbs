@@ -1,0 +1,72 @@
+<div id="test" dir="rtl" class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<h1 class="text-center">משימות</h1>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+			<form>
+				<div class="row">
+					<div class="col-md-3">
+						<button class="btn btn-success" {{action 'addTask'}}>{{fa-icon "plus"}}</button>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							{{input type="text" class="form-control" value=newTitle}}
+						</div>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+			</form>
+			{{#each tasks as |task|}}
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="well col-md-6">
+						{{#if task.done}}
+							<s><h4>{{task.title}}</h4></s>
+						{{else}}
+							<h4>{{task.title}}</h4>
+						{{/if}}
+						<button type="button" class="btn btn-{{if task.done "success" "default"}}" aria-label="Left Align" {{action "doneTask" task.id task.title task.done}}>{{fa-icon "check"}}</button>
+						<button class="btn btn-danger" {{action 'deleteTask' task.id}}>{{fa-icon "trash"}}</button>
+						<button type="button" class="btn btn-primary modalB" {{action 'openModal' task.id}}>
+				  		{{fa-icon "edit"}}
+						</button>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+			{{/each}}
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+
+<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h3 class="modal-title text-right" id="exampleModalLabel">ערוך משימה</h3>
+	      </div>
+	      	  <form>
+			      <div class="modal-body">
+			        {{input dir="rtl" type="text" value=editTaskTitle class="titleEdit form-control text-right"}}
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button class="btn btn-primary" {{action 'editTask'}}>Save changes</button>
+			      </div>
+		      </form>
+	    </div>
+	  </div>
+	</div>
+<script>
+
+</script>
